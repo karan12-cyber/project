@@ -2,13 +2,22 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 
+const gymRoutes = require("./routes/gymRoutes");
+
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Backend running ");
+  res.json({ status: "ok", message: "Backend running " });
+});
+
+app.use("/api/gym", gymRoutes);
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: "Something went wrong on the server" });
 });
 
 const PORT = process.env.PORT || 5000;
