@@ -2,15 +2,19 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 
+const connectDB = require("./config/db");
 const gymRoutes = require("./routes/gymRoutes");
 
 const app = express();
+
+// Connect to MongoDB
+connectDB();
 
 app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.json({ status: "ok", message: "Backend running " });
+  res.json({ status: "ok", message: "Backend running 🚀" });
 });
 
 app.use("/api/gym", gymRoutes);

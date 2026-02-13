@@ -1,3 +1,4 @@
-// Placeholder for future configuration
-// e.g. database setup, app-wide config, etc.
+// Re-export database connection for use elsewhere if needed
+const connectDB = require("./db");
+module.exports = { connectDB };
 
