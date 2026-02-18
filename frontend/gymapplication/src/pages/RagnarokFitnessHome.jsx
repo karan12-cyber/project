@@ -108,13 +108,22 @@ body {
   background: #060608;
 }
 
-/* deep dark base */
+/* discipline image — full hero, show image fully */
+.rk-hero-bg-image {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: url("/hero-discipline.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  min-height: 100%;
+  min-width: 100%;
+}
+/* lighter overlay so image shows more, text still readable */
 .rk-hero-bg {
   position: absolute; inset: 0; z-index: 1;
   background:
-    radial-gradient(ellipse 55% 70% at 72% 50%, rgba(232,200,74,0.07) 0%, transparent 65%),
-    radial-gradient(ellipse 40% 50% at 20% 80%, rgba(30,64,175,0.12) 0%, transparent 60%),
-    linear-gradient(160deg, #060608 0%, #0c0c10 100%);
+    linear-gradient(105deg, rgba(6,6,8,0.55) 0%, rgba(6,6,8,0.25) 40%, rgba(6,6,8,0.45) 100%),
+    radial-gradient(ellipse 60% 70% at 70% 50%, rgba(0,0,0,0.2) 0%, transparent 55%);
 }
 
 /* subtle noise grain overlay */
@@ -194,6 +203,28 @@ body {
   filter: saturate(0.85) contrast(1.05) brightness(0.88);
 }
 
+/* two-panel hero layout */
+.rk-hero-3d-card-grid {
+  display: grid;
+  grid-template-rows: 1.1fr 0.9fr;
+  height: 100%;
+  min-height: 520px;
+  max-height: 680px;
+}
+.rk-hero-3d-card-grid img {
+  max-height: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.rk-hero-3d-card-panel {
+  position: relative;
+  overflow: hidden;
+}
+.rk-hero-3d-card-panel:first-child {
+  border-bottom: 2px solid rgba(232,200,74,0.25);
+}
+
 /* gloss sheen on the card */
 .rk-hero-3d-sheen {
   position: absolute; inset: 0;
@@ -246,22 +277,6 @@ body {
   z-index: 2;
 }
 
-/* left-side glow bleeding from image */
-.rk-hero-ambient-glow {
-  position: absolute;
-  right: 30%; top: 20%; bottom: 20%;
-  width: 200px;
-  background: radial-gradient(ellipse, rgba(232,200,74,0.06) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 2;
-}
-
-@media (max-width: 1100px) {
-  .rk-hero-3d-wrap { width: 70%; right: -10%; opacity: 0.45; }
-}
-@media (max-width: 768px) {
-  .rk-hero-3d-wrap { display: none; }
-}
 
 /* ── HERO CONTENT ── */
 .rk-hero-content {
@@ -285,19 +300,47 @@ body {
   content: ''; display: block;
   width: 40px; height: 2px; background: var(--gold);
 }
+/* 3D headline — strong depth, more layers */
 .rk-hero h1 {
   font-family: var(--font-display);
   font-weight: 900; font-size: clamp(3.8rem, 9vw, 8rem);
   line-height: 0.92; text-transform: uppercase; letter-spacing: -1px;
   margin-bottom: 1.5rem;
-  text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+  position: relative;
+  color: #fff;
+  text-shadow:
+    1px 1px 0 rgba(0,0,0,0.95),
+    2px 2px 0 rgba(0,0,0,0.9),
+    3px 3px 0 rgba(0,0,0,0.88),
+    4px 4px 0 rgba(0,0,0,0.85),
+    5px 5px 0 rgba(0,0,0,0.82),
+    6px 6px 0 rgba(0,0,0,0.8),
+    7px 7px 0 rgba(0,0,0,0.78),
+    8px 8px 0 rgba(0,0,0,0.75),
+    9px 9px 0 rgba(0,0,0,0.72),
+    10px 10px 0 rgba(0,0,0,0.7),
+    12px 12px 0 rgba(0,0,0,0.65),
+    14px 14px 0 rgba(0,0,0,0.6),
+    16px 16px 24px rgba(0,0,0,0.55),
+    0 6px 50px rgba(0,0,0,0.5);
+  transform: perspective(600px) rotateX(-4deg) translateZ(20px);
+  transform-origin: left center;
 }
 .rk-hero h1 em {
   font-style: italic;
   background: linear-gradient(90deg, var(--gold) 0%, #f5d987 50%, var(--gold) 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 0 20px rgba(232,200,74,0.4));
+  filter: drop-shadow(0 0 24px rgba(232,200,74,0.5));
+  text-shadow:
+    1px 1px 0 rgba(0,0,0,0.9),
+    2px 2px 0 rgba(0,0,0,0.85),
+    3px 3px 0 rgba(0,0,0,0.8),
+    4px 4px 0 rgba(0,0,0,0.75),
+    5px 5px 0 rgba(0,0,0,0.7),
+    6px 6px 0 rgba(0,0,0,0.65),
+    7px 7px 0 rgba(0,0,0,0.6),
+    8px 8px 12px rgba(0,0,0,0.55);
 }
 .rk-hero-sub {
   font-size: 1.15rem; font-weight: 300; color: rgba(255,255,255,0.6);
@@ -879,37 +922,13 @@ export default function RagnarokFitnessHome() {
 
       {/* ── HERO ── */}
       <section className="rk-hero" id="home">
-        {/* Background layers */}
+        {/* Discipline image as full background behind "Break your limit" */}
+        <div className="rk-hero-bg-image" />
         <div className="rk-hero-bg" />
         <div className="rk-hero-grain" />
         <div className="rk-hero-grid" />
-        <div className="rk-hero-ambient-glow" />
 
-        {/* ── 3D IMAGE CARD (uploaded image) ── */}
-        <div className="rk-hero-3d-wrap">
-          {/* depth shadow layers */}
-          <div className="rk-hero-3d-shadow-far" />
-          <div className="rk-hero-3d-shadow-mid" />
-          {/* main card */}
-          <div className="rk-hero-3d-card">
-            <img
-              src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxASEhUREhIVFhIVFxgSGBYWFRIYFxIWFRUWGBcYGBgYHSggHRolGxUVITEhJSkrLi4wFx8zODMsNygtLisBCgoKBQUFDgUFDisZExkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIASwAqAMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABAYBAgUDB//EAD0QAAIBAgMFBgIHBgcBAAAAAAABAgMRBBIhBTFBUWEGEyJxgZEyoQcUQlJygrEjM5KywfAkU2KDotHhs//EABQBAQAAAAAAAAAAAAAAAAAAAAD/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwD4aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABLwmza9VN06cpJcbaadXodDYuyYyg69bSmr5Ve3eONnLXlblq27Ik4vb7mowVoxirLjFLpF8OS8uoHJnsmsoqWVWfKUG/a9yFKLWjOhU2nP7M6nm5NL+FOyMRcqt815tauyV7Le787Ac8EjHYSVKbhK11xTumuaZHAAAAAAAAAAAAAAAAAAAAAZim9FvA6OPxk5QhTWkIRUbLm7tt+bXyOc2XXEbGUtnyq5WqsJRT3ppWV01z8X/FlKYGD2wteUJKUXZrd/fqeJmKA6G0cQqkIOzzK0W39ppO7+S+ZzixdqsGqKhTgvClGV+N3Hj56ldAAAAAAAAAAAAAAAAAAAAb0ajjJSTs4tST5NO6NAB9JxtR1NnYnLHJKlUpvw3XhzStL1i/JnzeT1L92R2o6mGrUpRvmlRovVvNGUK2tnua7tPz8ylbSwzp1JQfBgRTaEmndbxBq+quuW4l7Mw2Zym/gpLPLrqko+bdkB3+2VeSbpyVpRhh4N8ZXoQqSv8AmaKmWXt/jXVxcnwyUZessPSbXkt3uVoAAAAAAAAAAAAAAAAAAAABO2VsjEYmWShSlN8bLwx6yk9Irq2gO72QqxjhsY5tqL7mOdb6Um6mWaXGzXs2Ru2tnVhUVnmpxu4u6k0rNp9VY6WJwNPCYCvS72NSvOpT7zI7xhGObKk+Osnd7telyoOrLLlvdLcnw8gPIsOwsJmw2IbdlJwiuclTzVJpeiRX49TudnJOdRp6RVOpFLhHNFpv/wBA5OOxUqtSVSW+Tv5ckuiVl6Hgb1aTi3FrVf37GgAAAAAAAAAAAAAAAJ2yNmTxE8kdEtZSfwwjzf8A1xAgnUwXZ3GVnanh6j0vdxcVb8UrItWCq0MK0sNBOcd9WSTm/J7orovmdDF9vMQ+N7unwn7y0RiLlVue+bWrslezdubA5wJGOwkqU3CS1XFO6a5pkcAAAAAAAAAAAAAAAAAzFN6LeBr09p1FG0Kso82lq19iJAAUurLNHBUc2bLGd52ty7O3tcu5KwPZ+rNXlRqJcXGSSXq7Imdo9pK+DlJU2nSteMJxvaXJPqua5dLFb2ltWviJXqVJSXJ/ZX4Vnb0X7oDs7U7P18Diam5VIJ5akU7q11Za8mm07dbPmXvsbtN16UoVJN1qfxO2ri9pcE3ySj0KtKvlhZXStnXkvW1v0LDSoQc9I5ZWzNXzRjxtp7XoCr7R2xVxMW6lRycpNW3KzfG1lbW1i04fCylBSXfO0Xmk7xi7bne6Xly5lY+s1r6dJKzfH7Xv1M9i6OJxE4whOShKcYpRcFFNpRV1p7NsCTidnssoypua0bkuKT5a5d5xMdCFOTUXq9bJ3SXDquTIe2KFelOdKUKiVqkVOnPLaPeSi+Eo3Ss+fmjlVJLxJ3cVJSzWTk4tNNadfb0A2liJSlJZsk5SulaSirPk07mYAa0VBPNe7k07tWSSS9eSZkAAAAAAAAAAAAABMwexMTWgqlKhUnB3tKMW07O25fwNMfhp0qkqdSLjOLtKMlZpnf+jPtBvYV8HSnjpxlCNWnGcasFGPeybhFtqMVvupJxT3avwPD6V/RpKvgpzq0m8TXotXcG08VN03GM3a8oqMpJPim27avVAUUAAAAAAAAAAAAAAAAAAAAGUcDblSoVHepOlKV3Z2i23FLpa2r5gafON5NJJuzdldt25AbUarjqk09OT6mNSbnJyk7t8W+rYAAAAAAAAAAAAAAAAAeqpGMakY1JOMHKKU1FNxi5K7SbSbt0TRSto7YxuNi5Yid4pXytRjFXWXSK4aXXqBoXjapVk7xhSr1J5E3aKhTk5JLlf5HHLr2L2n4SWKU6bi73Sac5JK6bte3NfMpVSt3lSVSS1uqT/DmzOXV7wO2tv7TrYiq6OGlGlRjBq8YRk5uycnJSTtbTRHJxlOrGpUiozUe8lmpxm9MzbvlVtd+t1Y0weJq0asatGcqclupVH6NNNeqA9MLio2jKFoTjdqWRNpu11HNFqKu0k9N+5cC2diuzeJ2hUTjHJQg7VKk1pHol9qXJfNr27i+i36LYGT+qYuNKEJxeJo1mtzkoSVSEW1HM3G6y3smm9eBW9s9oamPkk05Uqc3KlFpKys45klo83Xu2v3gPLsjt2WAxShK8qMoyjUgkpXjJWTj0kk1p56G3a1zjKnSr4ivl8dGrRiuVlGlNOz88+bqQAAAANqdPPdLflZfPlYxVot3bbcne7bbv1b3gfenZ+rhNn4nEOl46lGnTpKdlmhKUs003bje3LrqvQ8K9Go6cVCUHHK22tXCXF5d1+Z7bI25iMHS7jDVHC+bNZJ8pZuT3W11IdbFVantqs6s7WzTk5Oy0V3dvcBi0Z1oy00a01y3mDIAAAAAAAAAAAAAy2bAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGbGAAAAAzYwAAAAGbGAAAAAAAAAP/Z"
-              alt="Ragnarok Fitness Athlete"
-            />
-            {/* glass sheen */}
-            <div className="rk-hero-3d-sheen" />
-            {/* bottom fade */}
-            <div className="rk-hero-3d-fade" />
-            {/* left side fade into text */}
-            <div className="rk-hero-3d-left-fade" />
-            {/* gold edge line */}
-            <div className="rk-hero-3d-edge" />
-            {/* floating label */}
-            <div className="rk-hero-3d-badge">✦ RAGNAROK ATHLETE</div>
-          </div>
-        </div>
-
-        {/* ── HERO TEXT ── */}
+        {/* ── HERO TEXT (3D headline over discipline bg) ── */}
         <div className="rk-hero-content">
           <p className="rk-hero-eyebrow">A fitness movement worth sweating for</p>
           <h1>
@@ -1047,44 +1066,6 @@ export default function RagnarokFitnessHome() {
           </div>
         ))}
       </div>
-
-      {/* ── APP DOWNLOAD ── */}
-      <section className="rk-app-section rk-reveal">
-        <div className="rk-app-text">
-          <p className="rk-section-label" style={{ marginBottom: "0.6rem" }}>Mobile App</p>
-          <h2>DOWNLOAD THE<br />MOST LOVED<br />FITNESS APP</h2>
-          <p>
-            Book classes, track workouts, follow diet plans, and challenge friends —
-            all from your pocket. Join the RAGNAROK revolution.
-          </p>
-          <div className="rk-app-btns">
-            <button className="rk-store-btn">
-              <span className="rk-store-btn-icon">🍎</span>
-              <div>
-                <span className="rk-store-btn-text-top">Download on the</span>
-                <span className="rk-store-btn-text-main">App Store</span>
-              </div>
-            </button>
-            <button className="rk-store-btn">
-              <span className="rk-store-btn-icon">▶</span>
-              <div>
-                <span className="rk-store-btn-text-top">Get it on</span>
-                <span className="rk-store-btn-text-main">Google Play</span>
-              </div>
-            </button>
-          </div>
-        </div>
-
-        <div className="rk-app-mockup" style={{ overflow: "hidden" }}>
-          <img
-            src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=600&q=80"
-            alt="App preview"
-            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.6 }}
-          />
-          <span style={{ position: "relative", zIndex: 1, fontSize: "3rem" }}>📱</span>
-          <div className="rk-app-mockup-label">RAGNAROK APP</div>
-        </div>
-      </section>
 
       {/* ── JOIN SECTION ── */}
       <section className="rk-join-section rk-reveal">
