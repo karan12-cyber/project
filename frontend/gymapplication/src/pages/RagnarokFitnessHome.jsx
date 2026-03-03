@@ -929,33 +929,7 @@ export default function RagnarokFitnessHome() {
         <div className="rk-hero-grain" />
         <div className="rk-hero-grid" />
 
-<<<<<<< HEAD
         {/* ── HERO TEXT (3D headline over discipline bg) ── */}
-=======
-        {/* ── 3D IMAGE CARD (uploaded image) ── */}
-        <div className="rk-hero-3d-wrap">
-          {/* depth shadow layers */}
-          <div className="rk-hero-3d-shadow-far" />
-          <div className="rk-hero-3d-shadow-mid" />
-          {/* main card */}
-          <div className="rk-hero-3d-card">
-    
-            
-            {/* glass sheen */}
-            <div className="rk-hero-3d-sheen" />
-            {/* bottom fade */}
-            <div className="rk-hero-3d-fade" />
-            {/* left side fade into text */}
-            <div className="rk-hero-3d-left-fade" />
-            {/* gold edge line */}
-            <div className="rk-hero-3d-edge" />
-            {/* floating label */}
-            <div className="rk-hero-3d-badge">✦ RAGNAROK ATHLETE</div>
-          </div>
-        </div>
-
-        {/* ── HERO TEXT ── */}
->>>>>>> 9f3b1411653ba7202952659163420755892d3a0b
         <div className="rk-hero-content">
           <p className="rk-hero-eyebrow">A fitness movement worth sweating for</p>
           <h1>

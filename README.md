@@ -143,3 +143,18 @@ Current Plan
 Workout Today
 
 Membership Expiry Date
+
+---
+
+## How to run
+
+### Option A: Backend only (static HTML + API)
+1. Install dependencies: `npm install`
+2. Copy `.env` or set `PORT=5000` and `MONGO_URI=mongodb://127.0.0.1:27017/gym-app` (MongoDB is optional; server runs without it)
+3. Start server: `npm start` or `npm run dev`
+4. Open http://localhost:5000 for the IronFit static page, or http://localhost:5000/api/gym/welcome for the API
+
+### Option B: React frontend (Ragnarok Fitness)
+1. Backend: from project root run `npm start` (port 5000)
+2. Frontend: `cd frontend/gymapplication` then `npm install` and `npm run dev`
+3. Open http://localhost:5173 for the React app (API calls to `/api` are proxied to the backend)
