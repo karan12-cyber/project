@@ -40,5 +40,9 @@
 .read-the-docs {
   color: #888;
 }
+body {
+  margin: 0;
+  overflow: hidden; /* 🔥 disables full page scroll */
+}
 
 

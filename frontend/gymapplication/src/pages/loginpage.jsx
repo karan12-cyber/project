@@ -158,14 +158,17 @@ const LoginPage = () => {
 
 const styles = {
   container: {
-    width: "100vw",
-    height: "100vh",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    background:
-      "linear-gradient(135deg, #0f2027, #203a43, #2c5364)"
-  },
+    // padding:"-100px",
+    margin:"-125px",
+  width: "100vw",
+  height: "100vh",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  background:
+    "linear-gradient(135deg, #0f2027, #203a43, #2c5364)",
+  overflow: "hidden"   // 🔥 THIS FREEZES SCROLL
+},
 
   card: {
     width: "480px",
