@@ -68,7 +68,7 @@ const LoginPage = () => {
     <div style={styles.container}>
       <div style={styles.card}>
 
-        <h1 style={styles.logo}>RagnarokFitness</h1>
+        <h1 style={styles.logo}>Ragnarok.Fitness</h1>
 
         {/* Toggle */}
         <div style={styles.toggle}>
@@ -183,7 +183,7 @@ const styles = {
 
   logo: {
     marginBottom: "20px",
-    color: "#ff4d4d",
+    color: "#ffffff",
     letterSpacing: "2px"
   },
 
@@ -200,7 +200,7 @@ const styles = {
     position: "absolute",
     width: "50%",
     height: "100%",
-    background: "#ff4d4d",
+    background: "#e8c84a",
     borderRadius: "30px",
     transition: "0.3s"
   },
@@ -249,7 +249,7 @@ const styles = {
     padding: "12px",
     border: "none",
     borderRadius: "8px",
-    background: "#ff4d4d",
+    background: "#e8c84a",
     color: "#fff",
     fontWeight: "bold",
     cursor: "pointer"
