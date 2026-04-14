@@ -1,0 +1,108 @@
+/* Signup — same vibe as login (centered, no weird gaps) */
+.signup-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  margin: 0;
+  padding: 20px 16px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #1a3a42 0%, #0d1214 45%, #1a2529 100%);
+}
+
+.signup-center {
+  width: 100%;
+  max-width: 420px;
+}
+
+.signup-back {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.signup-back:hover {
+  color: #e8c84a;
+  text-decoration: underline;
+}
+
+.signup-card {
+  padding: 28px 26px 32px;
+  border-radius: 16px;
+  background: rgba(30, 38, 42, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+  color: #fff;
+  text-align: center;
+}
+
+.signup-card h1 {
+  font-size: 1.45rem;
+  margin: 0 0 6px;
+}
+
+.signup-sub {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 0 20px;
+}
+
+.signup-form input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.signup-form input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.signup-form input:focus {
+  outline: none;
+  border-color: #e8c84a;
+}
+
+.signup-err {
+  color: #ff8a8a;
+  font-size: 0.85rem;
+  margin: -4px 0 10px;
+  text-align: left;
+}
+
+.signup-btn {
+  width: 100%;
+  padding: 13px 16px;
+  border: none;
+  border-radius: 10px;
+  background: #e8c84a;
+  color: #111;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.signup-btn:hover {
+  background: #d4b43f;
+}
+
+.signup-footer {
+  margin-top: 18px;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.signup-footer a {
+  color: #e8c84a;
+  font-weight: 600;
+}

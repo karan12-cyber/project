@@ -1,0 +1,496 @@
+/* Ragnarok Fitness home — dark theme, black + red accents, simple cards */
+.rk-home {
+  --rk-bg: #0a0a0a;
+  --rk-surface: #121212;
+  --rk-card: #161616;
+  --rk-border: rgba(255, 255, 255, 0.08);
+  --rk-red: #dc2626;
+  --rk-red-dim: #b91c1c;
+  --rk-text: #f4f4f5;
+  --rk-muted: #a1a1aa;
+
+  font-family: "Segoe UI", system-ui, Arial, sans-serif;
+  background: var(--rk-bg);
+  color: var(--rk-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.rk-home a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.rk-container {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* —— Top bar —— */
+.rk-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(10, 10, 10, 0.95);
+  border-bottom: 1px solid var(--rk-border);
+  backdrop-filter: blur(8px);
+}
+
+.rk-topbar-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.rk-logo {
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.rk-topbar-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+}
+
+.rk-topbar-nav > a:not(.rk-btn) {
+  font-size: 0.88rem;
+  color: var(--rk-muted);
+}
+
+.rk-topbar-nav > a:not(.rk-btn):hover {
+  color: var(--rk-text);
+}
+
+.rk-icon-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--rk-border);
+  background: var(--rk-card);
+}
+
+.rk-icon-login:hover {
+  border-color: var(--rk-red);
+}
+
+.rk-profile-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* —— Buttons —— */
+.rk-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.rk-btn--primary {
+  background: var(--rk-red);
+  color: #fff;
+}
+
+.rk-btn--primary:hover {
+  background: var(--rk-red-dim);
+}
+
+.rk-btn--red {
+  background: transparent;
+  color: #fff;
+  border: 2px solid var(--rk-red);
+}
+
+.rk-btn--red:hover {
+  background: rgba(220, 38, 38, 0.15);
+}
+
+.rk-btn--outline {
+  background: transparent;
+  color: var(--rk-text);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+}
+
+.rk-btn--outline:hover {
+  border-color: #fff;
+}
+
+.rk-btn--ghost {
+  padding: 8px 16px;
+  background: transparent;
+  color: var(--rk-text);
+  border: 1px solid var(--rk-border);
+  font-weight: 600;
+}
+
+.rk-btn--ghost:hover {
+  border-color: var(--rk-red);
+  color: #fff;
+}
+
+.rk-btn--small {
+  padding: 8px 18px;
+  font-size: 0.82rem;
+}
+
+.rk-btn--outline-light {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.rk-btn--outline-light:hover {
+  border-color: var(--rk-red);
+  color: var(--rk-red);
+}
+
+.rk-btn--inline {
+  margin-top: 14px;
+}
+
+/* —— Hero —— */
+.rk-hero {
+  padding: 36px 20px 48px;
+  border-bottom: 1px solid var(--rk-border);
+}
+
+.rk-hero-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+@media (min-width: 880px) {
+  .rk-hero-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+
+.rk-hero-tag {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--rk-red);
+  font-weight: 700;
+  margin: 0 0 12px;
+}
+
+.rk-hero-title {
+  font-size: clamp(1.85rem, 5vw, 2.65rem);
+  font-weight: 800;
+  line-height: 1.12;
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+}
+
+.rk-hero-accent {
+  color: var(--rk-red);
+}
+
+.rk-hero-sub {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--rk-muted);
+  margin: 0 0 24px;
+  max-width: 36rem;
+}
+
+.rk-hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.rk-hero-visual {
+  justify-self: center;
+  width: 100%;
+  max-width: 440px;
+}
+
+.rk-hero-img-wrap {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--rk-border);
+}
+
+.rk-hero-img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  filter: saturate(0.9) contrast(1.05);
+}
+
+.rk-hero-img-frame {
+  position: absolute;
+  inset: 0;
+  border: 3px solid rgba(220, 38, 38, 0.35);
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+/* —— Sections —— */
+.rk-section {
+  padding: 44px 0;
+}
+
+.rk-section--dim {
+  background: var(--rk-surface);
+  border-top: 1px solid var(--rk-border);
+  border-bottom: 1px solid var(--rk-border);
+}
+
+.rk-section-title {
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 800;
+  text-align: center;
+  margin: 0 0 8px;
+}
+
+.rk-section-title--left {
+  text-align: left;
+}
+
+.rk-section-lead {
+  text-align: center;
+  color: var(--rk-muted);
+  margin: 0 0 28px;
+  font-size: 0.95rem;
+}
+
+/* —— Features —— */
+.rk-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.rk-feature-card {
+  background: var(--rk-card);
+  border: 1px solid var(--rk-border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.rk-feature-card h3 {
+  font-size: 1.05rem;
+  margin: 0 0 8px;
+}
+
+.rk-feature-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--rk-muted);
+  line-height: 1.5;
+}
+
+.rk-feature-icon {
+  font-size: 1.75rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* —— Plan cards —— */
+.rk-plan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.rk-plan-card {
+  background: var(--rk-card);
+  border: 1px solid var(--rk-border);
+  border-radius: 12px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rk-plan-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.rk-plan-card p {
+  margin: 0;
+  flex: 1;
+  font-size: 0.9rem;
+  color: var(--rk-muted);
+  line-height: 1.5;
+}
+
+/* —— Progress preview —— */
+.rk-progress-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.rk-progress-card {
+  background: var(--rk-card);
+  border: 1px solid var(--rk-border);
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 520px;
+  width: 100%;
+}
+
+.rk-progress-tagline {
+  color: var(--rk-muted);
+  margin: 0 0 18px;
+  font-size: 0.95rem;
+}
+
+.rk-stat-row {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 20px;
+}
+
+.rk-stat-num {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--rk-red);
+}
+
+.rk-stat-label {
+  font-size: 0.78rem;
+  color: var(--rk-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.rk-mini-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  height: 100px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 8px;
+  border: 1px solid var(--rk-border);
+}
+
+.rk-bar {
+  flex: 1;
+  min-height: 12px;
+  background: linear-gradient(180deg, var(--rk-red) 0%, var(--rk-red-dim) 100%);
+  border-radius: 4px 4px 0 0;
+  opacity: 0.85;
+}
+
+.rk-progress-note {
+  margin: 14px 0 0;
+  font-size: 0.82rem;
+  color: var(--rk-muted);
+}
+
+/* —— About / trainers —— */
+.rk-about-card {
+  background: var(--rk-card);
+  border: 1px solid var(--rk-border);
+  border-left: 4px solid var(--rk-red);
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 720px;
+}
+
+.rk-about-card p {
+  margin: 0;
+  color: var(--rk-muted);
+  line-height: 1.65;
+  font-size: 0.98rem;
+}
+
+/* —— Footer —— */
+.rk-footer {
+  margin-top: auto;
+  background: #050505;
+  border-top: 1px solid var(--rk-border);
+  padding: 32px 20px 20px;
+}
+
+.rk-footer-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+.rk-footer-col strong {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--rk-red);
+}
+
+.rk-footer-brand {
+  font-size: 1rem !important;
+  text-transform: none !important;
+  letter-spacing: 0.04em !important;
+  color: #fff !important;
+}
+
+.rk-footer-text {
+  margin: 0 0 6px;
+  font-size: 0.88rem;
+  color: var(--rk-muted);
+  line-height: 1.5;
+}
+
+.rk-footer-col a {
+  display: block;
+  font-size: 0.88rem;
+  color: var(--rk-muted);
+  margin-bottom: 6px;
+}
+
+.rk-footer-col a:hover {
+  color: #fff;
+}
+
+.rk-social {
+  display: flex;
+  gap: 14px;
+  font-size: 1.25rem;
+}
+
+.rk-footer-copy {
+  text-align: center;
+  margin: 28px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--rk-border);
+  font-size: 0.78rem;
+  color: #71717a;
+}

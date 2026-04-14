@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import "./loginpage.css";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const LoginPage = () => {
   const [form, setForm] = useState({
     email: "",
     password: "",
-    adminId: ""
+    adminId: "",
   });
 
   const [error, setError] = useState("");
@@ -20,13 +21,12 @@ const LoginPage = () => {
     setError("");
   };
 
-  // 🔥 Reset fields when switching role
   const handleRoleChange = (newRole) => {
     setRole(newRole);
     setForm({
       email: "",
       password: "",
-      adminId: ""
+      adminId: "",
     });
     setError("");
   };
@@ -53,58 +53,75 @@ const LoginPage = () => {
       return;
     }
 
-    // 🔥 Simulate login success
     if (role === "user") {
       console.log("User Login:", form);
     } else {
       console.log("Admin Login:", form);
     }
 
-    // ✅ Redirect after login
-    navigate("/home");
+    if (role === "user") {
+      const name = form.email.includes("@") ? form.email.split("@")[0] : "User";
+      const prev = (() => {
+        try {
+          return JSON.parse(localStorage.getItem("gymUser") || "null");
+        } catch {
+          return null;
+        }
+      })();
+      localStorage.setItem(
+        "gymUser",
+        JSON.stringify({
+          name: prev?.name || name,
+          membership: prev?.membership || "Active",
+          photoUrl: prev?.photoUrl || "",
+        })
+      );
+      navigate("/userdashboard");
+    } else {
+      navigate("/");
+    }
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.card}>
+    <div className="login-page">
+      <div className="login-page__center">
+        <Link to="/" className="login-back">
+          ← Back to home
+        </Link>
 
-        <h1 style={styles.logo}>Ragnarok.Fitness</h1>
+        <div className="login-card">
+        <h1>Ragnarok.Fitness</h1>
+        <p className="login-sub">Login to open your dashboard</p>
 
-        {/* Toggle */}
-        <div style={styles.toggle}>
+        <div className="login-toggle">
           <div
-            style={{
-              ...styles.slider,
-              transform: role === "admin" ? "translateX(100%)" : "translateX(0%)"
-            }}
+            className="login-toggle-slider"
+            style={{ transform: role === "admin" ? "translateX(100%)" : "translateX(0)" }}
           />
           <button
             type="button"
+            className={role === "user" ? "active" : ""}
             onClick={() => handleRoleChange("user")}
-            style={styles.toggleBtn}
           >
             User
           </button>
           <button
             type="button"
+            className={role === "admin" ? "active" : ""}
             onClick={() => handleRoleChange("admin")}
-            style={styles.toggleBtn}
           >
             Admin
           </button>
         </div>
 
-        <form onSubmit={handleSubmit}>
-
-          {/* Dynamic Input */}
+        <form className="login-form" onSubmit={handleSubmit}>
           {role === "user" ? (
             <input
               type="email"
               name="email"
-              placeholder="Enter Email"
+              placeholder="Enter email"
               value={form.email}
               onChange={handleChange}
-              style={styles.input}
               required
             />
           ) : (
@@ -114,153 +131,44 @@ const LoginPage = () => {
               placeholder="Enter Admin ID"
               value={form.adminId}
               onChange={handleChange}
-              style={styles.input}
               required
             />
           )}
 
-          {/* Password */}
-          <div style={styles.passwordWrapper}>
+          <div className="login-password-wrap">
             <input
               type={showPassword ? "text" : "password"}
               name="password"
-              placeholder="Enter Password"
+              placeholder="Enter password"
               value={form.password}
               onChange={handleChange}
-              style={styles.input}
               required
             />
-            <span
-              style={styles.eye}
-              onClick={() => setShowPassword(!showPassword)}
-            >
+            <span className="eye" onClick={() => setShowPassword(!showPassword)} role="button" tabIndex={0}>
               {showPassword ? "🙈" : "👁️"}
             </span>
           </div>
 
-          {/* Error */}
-          {error && <p style={styles.error}>{error}</p>}
+          {error && <p className="login-error">{error}</p>}
 
-          <button type="submit" style={styles.loginBtn}>
+          <button type="submit" className="login-submit">
             {role === "user" ? "Login as User" : "Login as Admin"}
           </button>
         </form>
 
-        <p style={styles.footer}>
-          {role === "user"
-            ? "New member? Sign up"
-            : "Restricted access • Admin only"}
+        <p className="login-footer">
+          {role === "user" ? (
+            <>
+              New member? <Link to="/signup">Sign up</Link>
+            </>
+          ) : (
+            "Admin access only"
+          )}
         </p>
+        </div>
       </div>
     </div>
   );
 };
-
-const styles = {
-  container: {
-    // padding:"-100px",
-    margin:"-125px",
-  width: "100vw",
-  height: "100vh",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  background:
-    "linear-gradient(135deg, #203a43, #0a0a0a, #203a43)",
-  overflow: "hidden"   // 🔥 THIS FREEZES SCROLL
-},
-
-  card: {
-    width: "480px",
-    padding: "40px",
-    borderRadius: "15px",
-    background: "rgba(255,255,255,0.05)",
-    backdropFilter: "blur(12px)",
-    color: "#fff",
-    textAlign: "center",
-    boxShadow: "0 8px 32px rgba(0,0,0,0.4)"
-  },
-
-  logo: {
-    marginBottom: "20px",
-    color: "#ffffff",
-    letterSpacing: "2px"
-  },
-
-  toggle: {
-    position: "relative",
-    display: "flex",
-    background: "#222",
-    borderRadius: "30px",
-    marginBottom: "20px",
-    overflow: "hidden"
-  },
-
-  slider: {
-    position: "absolute",
-    width: "50%",
-    height: "100%",
-    background: "#e8c84a",
-    borderRadius: "30px",
-    transition: "0.3s"
-  },
-
-  toggleBtn: {
-    flex: 1,
-    padding: "10px",
-    background: "transparent",
-    color: "#fff",
-    border: "none",
-    zIndex: 1,
-    cursor: "pointer"
-  },
-
-  input: {
-    width: "100%",
-    padding: "12px",
-    margin: "10px 0",
-    borderRadius: "8px",
-    border: "none",
-    outline: "none",
-    background: "#111",
-    color: "#fff"
-  },
-
-  passwordWrapper: {
-    position: "relative"
-  },
-
-  eye: {
-    position: "absolute",
-    right: "10px",
-    top: "50%",
-    transform: "translateY(-50%)",
-    cursor: "pointer"
-  },
-
-  error: {
-    color: "#ff4d4d",
-    fontSize: "13px",
-    marginBottom: "10px"
-  },
-
-  loginBtn: {
-    width: "100%",
-    padding: "12px",
-    border: "none",
-    borderRadius: "8px",
-    background: "#e8c84a",
-    color: "#fff",
-    fontWeight: "bold",
-    cursor: "pointer"
-  },
-
-  footer: {
-    marginTop: "15px",
-    fontSize: "13px",
-    color: "#ccc"
-  }
-};
-
 
 export default LoginPage;
