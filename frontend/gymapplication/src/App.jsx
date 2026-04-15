@@ -1,10 +1,10 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 
 import RagnarokFitnessHome from './pages/RagnarokFitnessHome.jsx'
-import LoginPage from "./pages/LoginPage.jsx";
-// import UserDashBord from "./pages/UserDashBord.jsx";
+import LoginPage from "./pages/loginpage.jsx";
+import SignupPage from "./pages/SignupPage.jsx";
+import UserDashboard from "./pages/UserDashboard.jsx";
 
 
 
@@ -14,8 +14,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/userdashboard" element={<UserDashboard />} />
         <Route path="/" element={<RagnarokFitnessHome />} />
-        {/* <Route path="/user" element={<UserDashBord />}/> */}
       </Routes>
     </BrowserRouter>
   );

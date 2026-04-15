@@ -1,8 +1,10 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  text-align: initial;
 }
 
 .logo {
@@ -41,9 +43,6 @@
   color: #888;
 }
 
-/* login {
-  margin: 0;
-  overflow: hidden; /* 🔥 disables full page scroll */
-} */
+/* login { margin: 0; overflow: hidden; } */
 
 

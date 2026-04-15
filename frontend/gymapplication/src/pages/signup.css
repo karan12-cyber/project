@@ -106,3 +106,177 @@
   color: #e8c84a;
   font-weight: 600;
 }
+
+/* ===== STEP INDICATOR ===== */
+.signup-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 22px;
+}
+
+.signup-step-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #2a2a2a;
+  border: 2px solid #444;
+  color: #666;
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.signup-step-dot.active {
+  background: #e8c84a;
+  border-color: #e8c84a;
+  color: #111;
+}
+
+.signup-step-line {
+  width: 50px;
+  height: 2px;
+  background: #333;
+}
+
+/* ===== STEP 2 FIELDS ===== */
+.signup-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.signup-field {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 5px;
+}
+
+.signup-field label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: left;
+}
+
+.signup-field input {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.07);
+  color: #fff;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+}
+
+.signup-field input:focus {
+  outline: none;
+  border-color: #e8c84a;
+}
+
+/* ===== GOAL SELECTOR ===== */
+.signup-goal-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.signup-goals {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.signup-goal-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 6px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  color: #aaa;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.signup-goal-btn span:first-child { font-size: 1.3rem; }
+
+.signup-goal-btn:hover { border-color: #888; color: #ddd; }
+
+.signup-goal-btn.selected {
+  border-color: #e8c84a;
+  background: rgba(232,200,74,0.1);
+  color: #e8c84a;
+}
+
+/* ===== STEP 2 BUTTONS ===== */
+.signup-step2-btns {
+  display: flex;
+  gap: 10px;
+}
+
+.signup-btn-back {
+  flex: 0 0 auto;
+  padding: 13px 16px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 10px;
+  background: transparent;
+  color: #aaa;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.signup-btn-back:hover { border-color: #e8c84a; color: #e8c84a; }
+
+.signup-step2-btns .signup-btn { flex: 1; }
+
+/* ===== PASSWORD WRAP ===== */
+.signup-pass-wrap {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.signup-pass-wrap input {
+  width: 100%;
+  padding: 12px 40px 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.07);
+  color: #fff;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.signup-pass-wrap input:focus { outline: none; border-color: #e8c84a; }
+
+.signup-eye {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1rem;
+  user-select: none;
+}

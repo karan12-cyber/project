@@ -12,6 +12,23 @@ function load(key, fallback) {
 }
 function save(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
 
+// get active user email, fall back to legacy gymUser for old sessions
+function getActiveEmail() {
+  return localStorage.getItem("gymActiveEmail") || "__legacy__";
+}
+function getProfile() {
+  const email = getActiveEmail();
+  if (email === "__legacy__") {
+    return load("gymUser", { name: "User", membership: "Active", photoUrl: "", age: null });
+  }
+  return load(`gymProfile_${email}`, { name: "User", membership: "Active", photoUrl: "", age: null });
+}
+function userKey(base) {
+  const email = getActiveEmail();
+  if (email === "__legacy__") return base; // old keys
+  return `${base}_${email}`;
+}
+
 const WORKOUTS = {
   Monday:    { label: "Chest Day 💪",   exercises: ["Bench Press – 4×10", "Incline DB Press – 3×12", "Cable Flyes – 3×15", "Push-ups – 2×failure"] },
   Tuesday:   { label: "Back Day 🏋️",    exercises: ["Deadlift – 4×6", "Pull-ups – 3×8", "Seated Row – 3×12", "Lat Pulldown – 3×12"] },
@@ -44,19 +61,19 @@ export default function UserDashboard() {
   const [activeTab, setActiveTab] = useState("home");
 
   // user data
-  const [user]         = useState(() => load("gymUser", { name: "User", membership: "Active", photoUrl: "" }));
-  const [weightKg, setWeightKg]   = useState(() => load("gymWeight", 75));
-  const [heightCm, setHeightCm]   = useState(() => load("gymHeight", 170));
-  const [targetKg, setTargetKg]   = useState(() => load("gymTarget", 70));
-  const [history, setHistory]     = useState(() => load("gymHistory", []));
+  const [user]         = useState(() => getProfile());
+  const [weightKg, setWeightKg]   = useState(() => load(userKey("gymWeight"), () => getProfile().weightKg || 75));
+  const [heightCm, setHeightCm]   = useState(() => load(userKey("gymHeight"), () => getProfile().heightCm || 170));
+  const [targetKg, setTargetKg]   = useState(() => load(userKey("gymTarget"), () => getProfile().weightKg || 70));
+  const [history, setHistory]     = useState(() => load(userKey("gymHistory"), []));
   const [water, setWater]         = useState(() => {
-    const d = load("gymWaterDate", "");
+    const d = load(userKey("gymWaterDate"), "");
     if (d !== todayStr()) return 0;
-    return load("gymWater", 0);
+    return load(userKey("gymWater"), 0);
   });
-  const [calories, setCalories]   = useState(() => load("gymCalTotal", 0));
-  const [todayDone, setTodayDone] = useState(() => load("gymTodayDone", "") === todayStr());
-  const [streak, setStreak]       = useState(() => load("gymStreak", 0));
+  const [calories, setCalories]   = useState(() => load(userKey("gymCalTotal"), 0));
+  const [todayDone, setTodayDone] = useState(() => load(userKey("gymTodayDone"), "") === todayStr());
+  const [streak, setStreak]       = useState(() => load(userKey("gymStreak"), 0));
 
   // ui state
   const [weightInput, setWeightInput]   = useState(String(weightKg));
@@ -71,19 +88,19 @@ export default function UserDashboard() {
   const [timerOn, setTimerOn]           = useState(false);
   const [restSec, setRestSec]           = useState(60);
   const [restOn, setRestOn]             = useState(false);
-  const [goalType, setGoalType]         = useState(() => load("gymGoalType", "lose"));
+  const [goalType, setGoalType]         = useState(() => load(userKey("gymGoalType"), () => getProfile().goal || "lose"));
 
   // persist
-  useEffect(() => { save("gymWeight", weightKg); }, [weightKg]);
-  useEffect(() => { save("gymHeight", heightCm); }, [heightCm]);
-  useEffect(() => { save("gymTarget", targetKg); }, [targetKg]);
-  useEffect(() => { save("gymHistory", history); }, [history]);
-  useEffect(() => { save("gymCalTotal", calories); }, [calories]);
-  useEffect(() => { save("gymStreak", streak); }, [streak]);
-  useEffect(() => { save("gymGoalType", goalType); }, [goalType]);
+  useEffect(() => { save(userKey("gymWeight"), weightKg); }, [weightKg]);
+  useEffect(() => { save(userKey("gymHeight"), heightCm); }, [heightCm]);
+  useEffect(() => { save(userKey("gymTarget"), targetKg); }, [targetKg]);
+  useEffect(() => { save(userKey("gymHistory"), history); }, [history]);
+  useEffect(() => { save(userKey("gymCalTotal"), calories); }, [calories]);
+  useEffect(() => { save(userKey("gymStreak"), streak); }, [streak]);
+  useEffect(() => { save(userKey("gymGoalType"), goalType); }, [goalType]);
   useEffect(() => {
-    save("gymWater", water);
-    save("gymWaterDate", todayStr());
+    save(userKey("gymWater"), water);
+    save(userKey("gymWaterDate"), todayStr());
   }, [water]);
 
   // workout timer
@@ -111,7 +128,7 @@ export default function UserDashboard() {
 
   const handleMarkDone = () => {
     if (todayDone) return;
-    save("gymTodayDone", todayStr());
+    save(userKey("gymTodayDone"), todayStr());
     setTodayDone(true);
     setStreak(s => s + 1);
     setCalories(c => c + 250);
@@ -506,6 +523,7 @@ export default function UserDashboard() {
 
             <div className="ud-profile-stats">
               <div className="ud-ps-item"><span>Total Workouts</span><strong>{history.length}</strong></div>
+              {user.age && <div className="ud-ps-item"><span>Age</span><strong>{user.age} yrs</strong></div>}
               <div className="ud-ps-item"><span>Current Weight</span><strong>{weightKg} kg</strong></div>
               <div className="ud-ps-item"><span>Height</span><strong>{heightCm} cm</strong></div>
               <div className="ud-ps-item"><span>BMI</span><strong>{bmi} ({bmiLabel})</strong></div>

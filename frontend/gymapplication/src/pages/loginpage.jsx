@@ -60,22 +60,24 @@ const LoginPage = () => {
     }
 
     if (role === "user") {
-      const name = form.email.includes("@") ? form.email.split("@")[0] : "User";
-      const prev = (() => {
-        try {
-          return JSON.parse(localStorage.getItem("gymUser") || "null");
-        } catch {
-          return null;
-        }
+      const key = form.email.toLowerCase().trim();
+      const profile = (() => {
+        try { return JSON.parse(localStorage.getItem(`gymProfile_${key}`) || "null"); }
+        catch { return null; }
       })();
-      localStorage.setItem(
-        "gymUser",
-        JSON.stringify({
-          name: prev?.name || name,
-          membership: prev?.membership || "Active",
-          photoUrl: prev?.photoUrl || "",
-        })
-      );
+
+      if (!profile) {
+        setError("No account found. Please sign up first.");
+        return;
+      }
+
+      if (profile.password !== form.password) {
+        setError("Wrong password.");
+        return;
+      }
+
+      // set active session
+      localStorage.setItem("gymActiveEmail", key);
       navigate("/userdashboard");
     } else {
       navigate("/");
