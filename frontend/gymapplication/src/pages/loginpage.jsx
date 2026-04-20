@@ -166,7 +166,7 @@ const styles = {
   justifyContent: "center",
   alignItems: "center",
   background:
-    "linear-gradient(135deg, #203a43, #0a0a0a, #203a43)",
+    "linear-gradient(135deg,#060606,#060606, #060606)",
   overflow: "hidden"   // 🔥 THIS FREEZES SCROLL
 },
 
