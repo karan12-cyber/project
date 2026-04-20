@@ -1,24 +1,12 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const express = require('express');
+const router = express.Router();
+const { register, login, getMe, updateProfile, changePassword } = require('../controllers/authController');
+const { protect } = require('../middleware/auth');
 
-const protect = async (req, res, next) => {
-  let token;
-  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-    try {
-      token = req.headers.authorization.split(' ')[1];
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = await User.findById(decoded.id).select('-password');
-      next();
-    } catch (error) {
-      return res.status(401).json({ success: false, message: 'Not authorized, token failed' });
-    }
-  }
-  if (!token) return res.status(401).json({ success: false, message: 'Not authorized, no token' });
-};
+router.post('/register', register);
+router.post('/login', login);
+router.get('/me', protect, getMe);
+router.put('/update-profile', protect, updateProfile);
+router.put('/change-password', protect, changePassword);
 
-const adminOnly = (req, res, next) => {
-  if (req.user && req.user.role === 'admin') return next();
-  return res.status(403).json({ success: false, message: 'Admin access only' });
-};
-
-module.exports = { protect, adminOnly };
+module.exports = router;
