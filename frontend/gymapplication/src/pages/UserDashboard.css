@@ -1,0 +1,801 @@
+/* ===== BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+.ud {
+  min-height: 100vh;
+  background: #0d0d0d;
+  color: #e8e8e8;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 15px;
+}
+
+/* ===== HEADER ===== */
+.ud-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  background: #111;
+  border-bottom: 1px solid #222;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.ud-header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ud-logo {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #e8c84a;
+  letter-spacing: 0.03em;
+}
+
+.ud-greeting {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.ud-header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ud-badge-mem {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.ud-badge-mem.active {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.ud-badge-mem.inactive {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.ud-logout {
+  font-size: 0.82rem;
+  color: #888;
+  text-decoration: none;
+  padding: 4px 10px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.ud-logout:hover { color: #e8c84a; border-color: #e8c84a; }
+
+/* ===== TABS ===== */
+.ud-tabs {
+  display: flex;
+  overflow-x: auto;
+  background: #111;
+  border-bottom: 1px solid #1e1e1e;
+  padding: 0 8px;
+  scrollbar-width: none;
+}
+
+.ud-tabs::-webkit-scrollbar { display: none; }
+
+.ud-tab {
+  flex-shrink: 0;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.ud-tab:hover { color: #ccc; }
+
+.ud-tab-active {
+  color: #e8c84a;
+  border-bottom-color: #e8c84a;
+}
+
+/* ===== MAIN ===== */
+.ud-main {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 20px 16px 40px;
+}
+
+.ud-section { display: flex; flex-direction: column; gap: 0; }
+
+.ud-sec-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #555;
+  margin-bottom: 12px;
+  margin-top: 4px;
+}
+
+/* ===== CONGRATS OVERLAY ===== */
+.ud-congrats {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+}
+
+.ud-congrats-box {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 16px;
+  padding: 36px 32px;
+  text-align: center;
+  max-width: 320px;
+  animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ud-congrats-emoji { font-size: 3rem; margin-bottom: 12px; }
+
+.ud-congrats-box h2 {
+  font-size: 1.5rem;
+  color: #e8c84a;
+  margin-bottom: 8px;
+}
+
+.ud-congrats-box p { color: #ccc; font-size: 1rem; }
+
+.ud-congrats-sub {
+  margin-top: 8px !important;
+  font-size: 0.85rem !important;
+  color: #888 !important;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes popIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* ===== HOME TAB ===== */
+.ud-today-card {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 1px solid #2a2a4a;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.ud-today-day {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #e8c84a;
+  margin-bottom: 4px;
+}
+
+.ud-today-label {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+.ud-today-list {
+  list-style: none;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ud-today-list li {
+  font-size: 0.9rem;
+  color: #bbb;
+  padding: 6px 10px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 6px;
+  border-left: 2px solid #e8c84a;
+}
+
+/* ===== BUTTONS ===== */
+.ud-btn-primary {
+  display: inline-block;
+  padding: 11px 22px;
+  background: #e8c84a;
+  color: #0a0a0a;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.ud-btn-primary:hover:not(:disabled) { background: #d4b43f; transform: translateY(-1px); }
+.ud-btn-primary:disabled, .ud-btn-done { background: #2a2a2a; color: #555; cursor: not-allowed; transform: none !important; }
+
+.ud-btn-outline {
+  display: inline-block;
+  padding: 10px 18px;
+  background: transparent;
+  color: #ccc;
+  border: 1px solid #333;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.ud-btn-outline:hover { border-color: #e8c84a; color: #e8c84a; }
+
+.ud-btn-red { border-color: #3a1a1a; color: #f87171; }
+.ud-btn-red:hover { border-color: #f87171; color: #f87171; }
+
+/* ===== STATS GRID ===== */
+.ud-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.ud-stat-card {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 16px 14px;
+  text-align: center;
+}
+
+.ud-stat-icon { font-size: 1.4rem; margin-bottom: 6px; }
+.ud-stat-val { font-size: 1.4rem; font-weight: 800; color: #e8c84a; }
+.ud-stat-lbl { font-size: 0.75rem; color: #666; margin-top: 2px; }
+
+/* ===== WATER ===== */
+.ud-water-section {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.ud-water-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.ud-water-count { color: #e8c84a; font-size: 0.85rem; }
+
+.ud-water-glasses {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.ud-glass {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  border: 1px solid #2a2a2a;
+  background: #1a1a1a;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  opacity: 0.3;
+}
+
+.ud-glass-filled { opacity: 1; background: rgba(59, 130, 246, 0.2); border-color: #3b82f6; }
+.ud-glass:hover { opacity: 0.7; }
+
+/* ===== MOTIVATION ===== */
+.ud-motivation {
+  background: rgba(232, 200, 74, 0.06);
+  border: 1px solid rgba(232, 200, 74, 0.15);
+  border-radius: 10px;
+  padding: 14px 16px;
+  text-align: center;
+  font-style: italic;
+  color: #aaa;
+  font-size: 0.88rem;
+}
+
+/* ===== WORKOUT TAB ===== */
+.ud-week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+@media (max-width: 500px) {
+  .ud-week-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.ud-week-card {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 10px;
+  padding: 10px 6px;
+  text-align: center;
+}
+
+.ud-week-today {
+  border-color: #e8c84a;
+  background: rgba(232, 200, 74, 0.08);
+}
+
+.ud-week-day {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.ud-week-today .ud-week-day { color: #e8c84a; }
+
+.ud-week-label {
+  font-size: 0.7rem;
+  color: #999;
+  line-height: 1.3;
+}
+
+.ud-exercise-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.ud-exercise-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.ud-ex-num {
+  width: 24px;
+  height: 24px;
+  background: #e8c84a;
+  color: #0a0a0a;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ud-log-section { margin-top: 4px; }
+
+.ud-log-form {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ud-log-form input {
+  flex: 1;
+  min-width: 180px;
+  padding: 10px 12px;
+  background: #141414;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.ud-log-form input:focus { outline: none; border-color: #e8c84a; }
+
+/* ===== PROGRESS TAB ===== */
+.ud-progress-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.ud-prog-card {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.ud-prog-label { font-size: 0.78rem; color: #666; margin-bottom: 6px; }
+.ud-prog-val { font-size: 1.3rem; font-weight: 800; color: #e8c84a; }
+.ud-prog-sub { font-size: 0.75rem; color: #888; font-weight: 400; }
+
+.ud-weight-section {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 4px;
+}
+
+.ud-weight-display {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.ud-weight-big { font-size: 2rem; font-weight: 800; color: #e8c84a; }
+.ud-weight-target { font-size: 0.85rem; color: #666; }
+
+.ud-weight-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ud-input-group { display: flex; flex-direction: column; gap: 5px; }
+
+.ud-input-group label {
+  font-size: 0.78rem;
+  color: #666;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ud-input-group input,
+.ud-section input,
+.ud-section select {
+  padding: 10px 12px;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-family: inherit;
+  width: 100%;
+}
+
+.ud-input-group input:focus,
+.ud-section input:focus { outline: none; border-color: #e8c84a; box-shadow: 0 0 0 2px rgba(232,200,74,0.1); }
+
+.ud-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ud-history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: #141414;
+  border: 1px solid #1e1e1e;
+  border-radius: 8px;
+}
+
+.ud-history-date { font-size: 0.8rem; color: #666; }
+.ud-history-name { font-size: 0.88rem; color: #ccc; font-weight: 500; }
+
+/* ===== DIET TAB ===== */
+.ud-meals {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.ud-meal-card {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.ud-meal-time {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #e8c84a;
+  margin-bottom: 4px;
+}
+
+.ud-meal-name {
+  font-size: 0.95rem;
+  color: #ddd;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.ud-meal-macros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ud-meal-macros span {
+  font-size: 0.75rem;
+  color: #888;
+  background: #1e1e1e;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.ud-macro-total {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.ud-macro-total h3 {
+  font-size: 0.85rem;
+  color: #888;
+  font-weight: 600;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.ud-macro-bars { display: flex; flex-direction: column; gap: 10px; }
+
+.ud-macro-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+}
+
+.ud-macro-row > span:first-child { width: 55px; color: #888; }
+.ud-macro-row > span:last-child { width: 40px; color: #ccc; text-align: right; }
+
+.ud-bar-wrap {
+  flex: 1;
+  height: 8px;
+  background: #1e1e1e;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ud-bar { height: 100%; border-radius: 4px; }
+.ud-bar-p { background: #e8c84a; }
+.ud-bar-c { background: #3b82f6; }
+.ud-bar-f { background: #f97316; }
+
+/* ===== TIMER TAB ===== */
+.ud-timer-card {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 14px;
+  padding: 28px 20px;
+  text-align: center;
+}
+
+.ud-timer-display {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #e8c84a;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  margin-bottom: 20px;
+  transition: color 0.3s;
+}
+
+.ud-timer-warn { color: #f87171; }
+
+.ud-timer-btns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ud-rest-presets {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.ud-preset { padding: 7px 14px; font-size: 0.82rem; }
+
+/* ===== GOALS TAB ===== */
+.ud-goal-options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.ud-goal-btn {
+  flex: 1;
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 12px;
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 12px;
+  color: #888;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.ud-goal-btn:hover { border-color: #444; color: #ccc; }
+
+.ud-goal-active {
+  border-color: #e8c84a;
+  color: #e8c84a;
+  background: rgba(232, 200, 74, 0.07);
+}
+
+.ud-goal-icon { font-size: 1.5rem; }
+
+.ud-badges {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.ud-badge-card {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 16px 14px;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.ud-badge-earned { border-color: #e8c84a; background: rgba(232,200,74,0.06); }
+.ud-badge-locked { opacity: 0.45; }
+
+.ud-badge-icon { font-size: 1.8rem; margin-bottom: 6px; }
+.ud-badge-label { font-size: 0.82rem; font-weight: 700; color: #ccc; margin-bottom: 4px; }
+.ud-badge-desc { font-size: 0.72rem; color: #666; }
+
+.ud-challenge-card {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.ud-challenge-title { font-size: 0.95rem; font-weight: 600; color: #ddd; margin-bottom: 14px; }
+
+.ud-challenge-progress {
+  height: 8px;
+  background: #1e1e1e;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.ud-challenge-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #e8c84a, #f5d987);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.ud-challenge-count { font-size: 0.8rem; color: #666; }
+
+/* ===== PROFILE TAB ===== */
+.ud-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.ud-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e8c84a, #d4b43f);
+  color: #0a0a0a;
+  font-size: 1.4rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ud-profile-name { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+
+.ud-mem-status {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.mem-active { background: rgba(34,197,94,0.12); color: #4ade80; border: 1px solid rgba(34,197,94,0.25); }
+.mem-inactive { background: rgba(239,68,68,0.12); color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
+
+.ud-mem-note { font-size: 0.72rem; color: #666; font-weight: 400; }
+
+.ud-profile-stats {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.ud-ps-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #1a1a1a;
+  font-size: 0.9rem;
+}
+
+.ud-ps-item:last-child { border-bottom: none; }
+.ud-ps-item span { color: #777; }
+.ud-ps-item strong { color: #e8c84a; font-weight: 600; }
+
+.ud-profile-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ===== MISC ===== */
+.ud-muted { color: #555; font-size: 0.88rem; }
+
+@media (max-width: 400px) {
+  .ud-stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .ud-badges { grid-template-columns: 1fr 1fr; }
+  .ud-timer-display { font-size: 2.8rem; }
+}
+
+.ud-save-inline {
+  margin-top: 8px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+}
